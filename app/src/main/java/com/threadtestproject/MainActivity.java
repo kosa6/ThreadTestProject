@@ -1,9 +1,8 @@
 package com.threadtestproject;
 
 import android.os.AsyncTask;
-import android.support.annotation.IdRes;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -18,7 +17,6 @@ public class MainActivity extends AppCompatActivity {
     private ProgressBar progressBar;
     private Button test;
     private ThreadCount thread;
-    private boolean isThreadRunning;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         stop = (Button) findViewById(R.id.Stop);
         start = (Button) findViewById(R.id.Start);
-        isThreadRunning =false;
         startOnClick();
         stopOnClick();
         testOnClick();
@@ -43,13 +40,8 @@ public class MainActivity extends AppCompatActivity {
                 toastMessage(Integer.toString(number));
                 progressBar.setMax(number*10);
                 progressBar.setProgress(0);
-                if(isThreadRunning==false) {
-                    thread = new ThreadCount();
-                    isThreadRunning = true;
-                } else {
-                    thread.cancel(true);
-                    thread = new ThreadCount();
-                }
+                thread = new ThreadCount();
+                start.setClickable(false);
                 thread.execute(number);
             }
         });
@@ -61,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
             {
                 thread.cancel(true);
                 progressBar.setProgress(0);
-                isThreadRunning = false;
+                start.setClickable(true);
             }
         });
     }
@@ -71,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v)
             {
                 toastMessage("Running");
+                thread.getStatus();
             }
         });
     }
@@ -87,6 +80,9 @@ public class MainActivity extends AppCompatActivity {
         protected Integer doInBackground(Integer... number) {
             int x=0;
             for (int i = 0; i < number[0]; i++) {
+                if(isCancelled()==true) {
+                    break;
+                }
                 x+=10;
                 try {
                     Thread.sleep(1000);

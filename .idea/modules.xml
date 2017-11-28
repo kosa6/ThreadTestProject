@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/ThreadTestProject.iml" filepath="$PROJECT_DIR$/ThreadTestProject.iml" />
+      <module fileurl="file://C:\Users\Joanna\Downloads\ThreadTestProject-master\ThreadTestProject-master\ThreadTestProject.iml" filepath="C:\Users\Joanna\Downloads\ThreadTestProject-master\ThreadTestProject-master\ThreadTestProject.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ThreadTestProject-master.iml" filepath="$PROJECT_DIR$/ThreadTestProject-master.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
